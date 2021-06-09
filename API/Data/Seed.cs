@@ -20,7 +20,7 @@ namespace API.Data
 
             var roles = new List<AppRole>
             {
-                new AppRole{Name = "Member"},
+                new AppRole{Name = "Member"},   
                 new AppRole{Name = "Admin"},
                 new AppRole{Name = "Moderator"},
             };
@@ -34,7 +34,7 @@ namespace API.Data
             {
                 user.UserName = user.UserName.ToLower();
                 await userManager.CreateAsync(user, "Pa$$w0rd");
-                await userManager.AddToRoleAsync(user, "Member");
+                await userManager.AddToRoleAsync(user, "Member");                   
             }
 
             var admin = new AppUser

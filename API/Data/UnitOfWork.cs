@@ -20,6 +20,13 @@ namespace API.Data
 
         public ILikesRepository LikesRepository => new LikesRepository(_context);
 
+        public IPostRepository PostRepository => new PostRepository(_context, _mapper);
+
+        public ICommentRepository CommentRepository => new CommentRepository(_context, _mapper);
+
+        
+        
+
         public async Task<bool> Complete()
         {
             return await _context.SaveChangesAsync() > 0;

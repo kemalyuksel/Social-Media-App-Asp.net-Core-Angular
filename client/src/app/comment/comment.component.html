@@ -1,0 +1,28 @@
+
+<div  *ngFor="let comment of commentList" class="card p-4 shadow-lg ml-3">
+
+
+      <div class="row">
+        <div class="col-md-8">
+
+            <a class="p-2"  href="/member/{{comment.appUser.username}}">
+                <img src="{{comment.appUser.photoUrl || './assets/user.png'}}" class="rounded-circle suggestions" alt="">
+                <b style="font-size: 14px;"> {{comment.appUser.username}}:</b></a>
+        
+                <a style="font-size: 14px;font-family: Arial, Helvetica, sans-serif;margin-top: 5px; text-align: center"> {{comment.content}}  </a> 
+        </div>
+
+        <div class="col-md-4 float-right">
+            <a class="float-right text-right blockquote-footer p-2" style="font-size: 12px;">  {{comment.createdTime | date:'medium' }} </a>
+            <button *ngIf="(accountService.currentUser$ | async).username === comment.appUser.username" (click)="$event.stopPropagation()" (click)="deleteComment(comment.id)"
+            class='btn btn-danger float-right fa fa-trash'> Delete Comment </button>
+                </div>
+      </div>
+        
+
+        <br>
+  </div>
+
+<div  *ngIf="commentList.length <= 0"  class="text-center alert alert-info mx-auto" role="alert">
+   No comments yet!  
+  </div>

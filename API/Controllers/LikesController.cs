@@ -28,11 +28,11 @@ namespace API.Controllers
 
             if (likedUser == null) return NotFound();
 
-            if (sourceUser.UserName == username) return BadRequest("You cannot like yourself");
+            if (sourceUser.UserName == username) return BadRequest("You cannot add yourself");
 
             var userLike = await _unitOfWork.LikesRepository.GetUserLike(sourceUserId, likedUser.Id);
 
-            if (userLike != null) return BadRequest("You already like this user");
+            if (userLike != null) return BadRequest("You already added this user");
 
             userLike = new UserLike
             {
@@ -44,7 +44,7 @@ namespace API.Controllers
 
             if (await _unitOfWork.Complete()) return Ok();
 
-            return BadRequest("Failed to like user");
+            return BadRequest("Failed to add user");
         }
 
         [HttpGet]

@@ -1,0 +1,10 @@
+<div class="card-text p-4 ml-4" style="font-size: 15px">
+    <div class="form-group">
+      <textarea class="form-control" style="border-radius: 10px" id="exampleFormControlTextarea1" rows="3" cols="120" placeholder="write your comment here" [(ngModel)]="commentModel.content"></textarea>
+    </div>
+  </div>
+
+    <button (click)="addComment()" class="btn text-white fa fa-comment" >
+      Add Comment
+    </button>
+

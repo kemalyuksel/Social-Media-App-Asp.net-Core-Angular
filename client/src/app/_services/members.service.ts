@@ -23,7 +23,7 @@ export class MembersService {
   constructor(private http: HttpClient, private accountService: AccountService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
       this.user = user;
-      this.userParams = new UserParams(user);
+      this.userParams = new UserParams();
     })
   }
 
@@ -36,7 +36,7 @@ export class MembersService {
   }
 
   resetUserParams() {
-    this.userParams = new UserParams(this.user);
+    this.userParams = new UserParams();
     return this.userParams;
   }
 
@@ -50,7 +50,8 @@ export class MembersService {
 
     params = params.append('minAge', userParams.minAge.toString());
     params = params.append('maxAge', userParams.maxAge.toString());
-    params = params.append('gender', userParams.gender);
+    params = params.append('username', userParams.username.toString());
+    // params = params.append('gender', userParams.gender);
     params = params.append('orderBy', userParams.orderBy);
 
     return getPaginatedResult<Member[]>(this.baseUrl + 'users', params, this.http)
@@ -88,7 +89,7 @@ export class MembersService {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
 
-  addLike(username: string) {
+  addFriend(username: string) {
     return this.http.post(this.baseUrl + 'likes/' + username, {})
   }
 

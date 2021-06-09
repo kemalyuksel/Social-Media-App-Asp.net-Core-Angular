@@ -4,6 +4,10 @@
     height: 85%;
 }
 
+.fa-user-circle{
+    color: greenyellow;
+}
+
 .card-body {
     padding: 0 25px;
 }
@@ -12,4 +16,8 @@
     padding: 10px 15px;
     background-color: #fff;
     border-top: none;
+}
+
+button{
+    color: white;
 }

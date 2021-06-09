@@ -1,0 +1,60 @@
+<div class="container mt-1 p-1">
+
+  <div *ngIf="(accountService.currentUser$ | async).username === username" class="card p-3 shadow-lg" style="border-radius: 15px;">
+
+      <div class="card-text " style="font-size: 15px;">
+        <div class="form-group">
+          <textarea class="form-control" style="border-radius: 10px" id="exampleFormControlTextarea1" rows="3" placeholder="Post something" [(ngModel)]="postModel.content"></textarea>
+        </div>
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic example">
+      
+        <input type="text" name="Medias" id="mediaUrl" placeholder="Paste MediaURL" [(ngModel)]="postModel.mediaUrl" class="btn shadow-sm  text-white fa fa-image" style="background-color: #5f99cf;">
+        <button (click)="addPost()" class="btn text-white fa fa-share-square" style="background-color: #336699;">
+          Send
+        </button>
+      </div>
+    </div>
+    
+
+    <div  *ngFor="let post of postList" class="card p-4 shadow-lg mt-2" style="border-radius: 7px;">
+      <a class="p-2" href="/member/{{post.appUser.username}}">
+         <img src="{{post.appUser.photoUrl || './assets/user.png'}}" class="rounded-circle suggestions mr-2" style="width: 60px;" alt="">
+         <b> {{post.appUser.username}}</b>
+      </a>
+  
+      <div class="card-text p-3 ml-4" >
+        <p style="font-size: 16px;font-family: Arial, Helvetica, sans-serif;">{{post.content}}
+        </p>
+        <hr>
+      </div>
+
+      <iframe *ngIf="post.mediaUrl.includes('spotify')" width="80%" height="380" frameBorder="0" class="mx-auto" allowtransparency="true" allow="encrypted-media"  [src]="transform(post.mediaUrl)" ></iframe>
+
+      <iframe *ngIf="post.mediaUrl.includes('youtube')" style="margin-top: -20px;" width="560" height="315" class="mx-auto"  [src]="transform(post.mediaUrl)" title="YouTube video player" 
+      frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      
+          <img *ngIf="!post.mediaUrl.includes('empty')" src="{{post.mediaUrl}}" class="card-image mx-auto" style="margin-top: -20px;" alt="">
+    
+          <a class="float-right text-right mt-4 font-italic" style="font-size: 14px;"><a class="fa fa-clock-o"></a>  {{post.createdTime | date:'medium' }} </a>
+
+      <div class="btn-group mt-2" role="group" aria-label="Basic example">
+        <tabset class="member-tabset" #memberTabs  style="width: 800px;">
+          <tab heading='Add Comment'>
+              <app-add-comment [id]="post.id" ></app-add-comment>
+         </tab>
+
+          <tab heading='Comments' >
+             <app-comment [id]="post.id"></app-comment>
+          </tab>
+          
+          <tab heading='Delete Post' *ngIf="(accountService.currentUser$ | async).username === post.appUser.username">
+
+            <button  (click)="$event.stopPropagation()" (click)="deletePost(post.id)"class='btn btn-danger fa fa-trash text-center w-100 p-2'> Delete Post  </button>
+
+          </tab>
+      </tabset>
+        
+      </div>
+    </div>
+</div>

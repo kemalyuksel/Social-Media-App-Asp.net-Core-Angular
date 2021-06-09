@@ -1,17 +1,13 @@
 <div class="row mb-4">
     <div class="btn-group" name='container'>
-        <button class="btn btn-primary" btnRadio='Unread' [(ngModel)]="container" 
-            (click)="loadMessages()">
-            <i class="fa fa-envelope"></i> Unread
-        </button>
-        <button class="btn btn-primary" btnRadio='Inbox' [(ngModel)]="container" 
+        <button class="btn btn-success" btnRadio='Inbox' [(ngModel)]="container" 
             (click)="loadMessages()">
             <i class="fa fa-envelope-open"></i> Inbox
         </button>
-        <button class="btn btn-primary" btnRadio='Outbox' [(ngModel)]="container" 
+        <button class="btn btn-info" btnRadio='Outbox' [(ngModel)]="container" 
             (click)="loadMessages()">
             <i class="fa fa-paper-plane"></i> Outbox
-        </button>
+        </button>   
     </div>
 </div>
 
@@ -29,8 +25,8 @@
         </tr>
         <tr [hidden]="loading" *ngFor="let message of messages" 
             routerLink='{{container === "Outbox" 
-                ? "/members/" + message.recipientUsername 
-                : "/members/" + message.senderUsername}}' [queryParams]='{tab: 3}' >
+                ? "/member/" + message.recipientUsername 
+                : "/member/" + message.senderUsername}}' [queryParams]='{tab: 2}' >
             <td>{{message.content}}</td>    
             <td>
                 <div *ngIf="container === 'Outbox'">

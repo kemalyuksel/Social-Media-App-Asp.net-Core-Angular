@@ -14,6 +14,10 @@ import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.gu
 import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './_guards/admin.guard';
+import { HomePageComponent } from './home/home-page/home-page.component';
+import { ExploreListComponent } from './explore/explore-list/explore-list.component';
+import { CommentComponent } from './comment/comment.component';
+import { AddCommentComponent } from './add-comment/add-comment.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,9 +26,13 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
+      {path: 'home', component: HomePageComponent},
+      {path: 'explore', component: ExploreListComponent},
       {path: 'members', component: MemberListComponent},
-      {path: 'members/:username', component: MemberDetailComponent, resolve: {member: MemberDetailedResolver}},
-      {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
+      {path: 'comments/:id', component: CommentComponent},
+      {path: 'add-comment/:id', component: AddCommentComponent},
+      {path: 'member/:username', component: MemberDetailComponent, resolve: {member: MemberDetailedResolver}},
+      {path: 'profile/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       {path: 'lists', component: ListsComponent},
       {path: 'messages', component: MessagesComponent},
       {path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard]},

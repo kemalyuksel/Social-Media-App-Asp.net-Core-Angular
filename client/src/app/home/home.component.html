@@ -1,10 +1,16 @@
 <div class="container mt-5">
+
     <div *ngIf="!registerMode" style='text-align: center;'>
-        <h1>Find your match</h1>
-        <p class="lead">Come on in to view your matches... all you need to do is sign up!</p>
-        <div class="text-center">
-            <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Register</button>
-            <button class="btn btn-info btn-lg">Learn more</button>
+
+        <div class="col-lg">
+            <div class="jumbotron text-center" style="height:480px;margin-top:150px;background-image: url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX21454561.jpg');border-radius: 20px;">
+                <h1 class="display-4 text-white p-2" style="margin-top: -65px;">Social Network</h1>
+                <hr class="my-4">
+                <h1 class="display-3 text-white p-2" style="margin-top: 270px;"> <b class="text-success">Asp.Net Core </b> & <b class="text-danger"> Angular</b></h1>
+            </div>
+            <div class="text-center">
+                <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Register</button>
+            </div>
         </div>
     </div>
 

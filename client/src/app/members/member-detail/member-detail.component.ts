@@ -10,6 +10,7 @@ import { PresenceService } from 'src/app/_services/presence.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
 import { take } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-member-detail',
@@ -26,8 +27,8 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   user: User;
 
   constructor(public presence: PresenceService, private route: ActivatedRoute, 
-    private messageService: MessageService, private accountService: AccountService,
-    private router: Router) { 
+    private messageService: MessageService, public accountService: AccountService,
+    private router: Router,private memberService: MembersService,private toastr: ToastrService) { 
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
@@ -88,6 +89,12 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.messageService.stopHubConnection();
+  }
+
+  addFriend(member: Member) {
+    this.memberService.addFriend(member.username).subscribe(() => {
+      this.toastr.success('You added " ' + member.knownAs+ ' " to your friends' );
+    })
   }
 
 }
