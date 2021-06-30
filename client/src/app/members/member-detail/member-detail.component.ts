@@ -93,7 +93,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   addFriend(member: Member) {
     this.memberService.addFriend(member.username).subscribe(() => {
-      this.toastr.success('You added " ' + member.knownAs+ ' " to your friends' );
+      this.toastr.success( 'You started following '  + member.knownAs );
     })
   }
 

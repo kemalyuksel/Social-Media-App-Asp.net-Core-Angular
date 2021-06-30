@@ -28,11 +28,11 @@ namespace API.Controllers
 
             if (likedUser == null) return NotFound();
 
-            if (sourceUser.UserName == username) return BadRequest("You cannot add yourself");
+            if (sourceUser.UserName == username) return BadRequest("You cannot follow yourself");
 
             var userLike = await _unitOfWork.LikesRepository.GetUserLike(sourceUserId, likedUser.Id);
 
-            if (userLike != null) return BadRequest("You already added this user");
+            if (userLike != null) return BadRequest("You are already following this user");
 
             userLike = new UserLike
             {

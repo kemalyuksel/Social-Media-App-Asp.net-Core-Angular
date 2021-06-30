@@ -27,7 +27,6 @@ export class PostService {
    }
 
    addPost(model : PostModel) {
-    console.log(model);
     return this.http.post(this.baseUrl + 'posts/' ,model);
   }
 
